@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Ruth Patience</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family: 'Segoe UI', sans-serif;
+background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+color:white;
+text-align:center;
+overflow-x:hidden;
+}
+
+.section{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+padding:25px;
+animation:fade 1s ease-in-out;
+}
+
+@keyframes fade{
+from{opacity:0; transform:translateY(20px);}
+to{opacity:1; transform:translateY(0);}
+}
+
+h1{
+font-size:1.8rem;
+margin-bottom:20px;
+}
+
+p{
+font-size:1rem;
+line-height:1.6;
+margin-bottom:20px;
+max-width:500px;
+}
+
+button{
+padding:12px 25px;
+border:none;
+border-radius:30px;
+background:#ff4e88;
+color:white;
+font-size:1rem;
+cursor:pointer;
+margin-top:15px;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.05);
+background:#ff2e6e;
+}
+
+.hidden{
+display:none;
+}
+
+.quiz-option{
+background:white;
+color:#333;
+margin:10px 0;
+padding:12px;
+border-radius:25px;
+cursor:pointer;
+transition:0.3s;
+width:100%;
+max-width:300px;
+}
+
+.quiz-option:hover{
+background:#ff4e88;
+color:white;
+}
+
+video{
+width:100%;
+max-width:350px;
+border-radius:20px;
+margin-top:20px;
+}
+
+/* Music Player */
+.music-box{
+margin-top:20px;
+background:rgba(255,255,255,0.1);
+padding:15px;
+border-radius:20px;
+backdrop-filter: blur(10px);
+}
+
+select{
+padding:8px;
+border-radius:10px;
+border:none;
+margin-bottom:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div class="section" id="home">
+<h1>🎉 Joyeux Anniversaire Ruth Patience 🎉</h1>
+
+<p>
+Aujourd’hui est un jour spécial…<br><br>
+Alors j’ai décidé de créer quelque chose d’unique,  
+une petite expérience digitale juste pour toi 💫
+</p>
+
+<div class="music-box">
+<h3>🎵 Choisis une musique</h3>
+<select id="musicSelect">
+<option value="music1.mp3">Romantique douce</option>
+<option value="music2.mp3">Chill vibes</option>
+<option value="music3.mp3">Happy birthday instrumental</option>
+</select><br>
+<button onclick="playMusic()">▶️ Jouer</button>
+<button onclick="pauseMusic()">⏸️ Pause</button>
+</div>
+
+<button onclick="showVideo()">Découvrir la surprise</button>
+</div>
+
+<!-- VIDEO -->
+<div class="section hidden" id="videoSection">
+<h1>Une petite vidéo pour toi 🎥</h1>
+
+<video controls>
+<source src="video.mp4" type="video/mp4">
+</video>
+
+<button onclick="startQuiz()">Continuer</button>
+</div>
+
+<!-- QUIZ -->
+<div class="section hidden" id="quizSection">
+<h1>Petit Quiz Spécial ✨</h1>
+<div id="quizContainer"></div>
+</div>
+
+<!-- FINAL -->
+<div class="section hidden" id="finalSection">
+<h1>🎉 Surprise Finale 🎉</h1>
+<p>
+Si cette petite surprise t’a fait sourire…  
+Peut-être que la prochaine conversation commence ici 💬✨
+</p>
+
+<img src="qr.png" width="180"><br>
+
+<a href="https://wa.me/TONNUMERO" target="_blank">
+<button>Me contacter sur WhatsApp</button>
+</a>
+</div>
+
+<audio id="bgMusic"></audio>
+
+<script>
+
+// MUSIC
+let audio = document.getElementById("bgMusic");
+
+function playMusic(){
+let selected = document.getElementById("musicSelect").value;
+audio.src = selected;
+audio.play();
+}
+
+function pauseMusic(){
+audio.pause();
+}
+
+// NAVIGATION
+function showVideo(){
+document.getElementById("home").classList.add("hidden");
+document.getElementById("videoSection").classList.remove("hidden");
+}
+
+function startQuiz(){
+document.getElementById("videoSection").classList.add("hidden");
+document.getElementById("quizSection").classList.remove("hidden");
+loadQuestion();
+}
+
+// QUIZ
+let questions = [
+{
+question:"Si Ruth était une étoile ⭐ ?",
+options:["La plus brillante","La plus rare","Celle qui guide les autres"]
+},
+{
+question:"Quel est le vrai charme ?",
+options:["La beauté","La douceur","L’authenticité"]
+},
+{
+question:"Quelle surprise est la plus mémorable ?",
+options:["Un cadeau","Un moment partagé","Une attention pensée spécialement"]
+}
+];
+
+let currentQuestion = 0;
+
+function loadQuestion(){
+if(currentQuestion >= questions.length){
+showFinal();
+return;
+}
+
+let q = questions[currentQuestion];
+let container = document.getElementById("quizContainer");
+
+container.innerHTML = "<h3>"+q.question+"</h3>";
+
+q.options.forEach(option=>{
+let div = document.createElement("div");
+div.className="quiz-option";
+div.innerText=option;
+div.onclick=()=>{
+currentQuestion++;
+loadQuestion();
+};
+container.appendChild(div);
+});
+}
+
+function showFinal(){
+document.getElementById("quizSection").classList.add("hidden");
+document.getElementById("finalSection").classList.remove("hidden");
+launchConfetti();
+}
+
+// CONFETTI
+function launchConfetti(){
+for(let i=0;i<80;i++){
+let conf = document.createElement("div");
+conf.style.position="fixed";
+conf.style.width="6px";
+conf.style.height="6px";
+conf.style.background="white";
+conf.style.top=Math.random()*window.innerHeight+"px";
+conf.style.left=Math.random()*window.innerWidth+"px";
+conf.style.opacity=Math.random();
+document.body.appendChild(conf);
+}
+}
+
+</script>
+
+</body>
+</html>
