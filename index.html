@@ -15,8 +15,8 @@ box-sizing:border-box;
 
 body{
 font-family: 'Segoe UI', sans-serif;
-background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-color:white;
+background: linear-gradient(135deg,#ff9a9e,#fecfef,#ffdde1);
+color:#7a004f;
 text-align:center;
 overflow-x:hidden;
 }
@@ -37,8 +37,8 @@ to{opacity:1; transform:translateY(0);}
 }
 
 h1{
-font-size:1.8rem;
-margin-bottom:20px;
+font-size:1.9rem;
+margin-bottom:15px;
 }
 
 p{
@@ -56,8 +56,9 @@ background:#ff4e88;
 color:white;
 font-size:1rem;
 cursor:pointer;
-margin-top:15px;
+margin-top:20px;
 transition:0.3s;
+box-shadow:0 4px 15px rgba(0,0,0,0.2);
 }
 
 button:hover{
@@ -69,9 +70,17 @@ background:#ff2e6e;
 display:none;
 }
 
+video{
+width:100%;
+max-width:350px;
+border-radius:20px;
+margin-top:15px;
+box-shadow:0 8px 25px rgba(0,0,0,0.2);
+}
+
 .quiz-option{
 background:white;
-color:#333;
+color:#7a004f;
 margin:10px 0;
 padding:12px;
 border-radius:25px;
@@ -86,17 +95,10 @@ background:#ff4e88;
 color:white;
 }
 
-video{
-width:100%;
-max-width:350px;
-border-radius:20px;
-margin-top:20px;
-}
-
-/* Music Player */
+/* Music Box */
 .music-box{
-margin-top:20px;
-background:rgba(255,255,255,0.1);
+margin-top:15px;
+background:rgba(255,255,255,0.4);
 padding:15px;
 border-radius:20px;
 backdrop-filter: blur(10px);
@@ -116,50 +118,48 @@ margin-bottom:10px;
 
 <!-- PAGE 1 -->
 <div class="section" id="home">
-<h1>🎉 Joyeux Anniversaire Ruth Patience 🎉</h1>
+
+<h1>💖 Joyeux Anniversaire Ruth Patience 💖</h1>
 
 <p>
-Aujourd’hui est un jour spécial…<br><br>
-Alors j’ai décidé de créer quelque chose d’unique,  
-une petite expérience digitale juste pour toi 💫
+Aujourd’hui est un jour exceptionnel…<br><br>
+Le jour où une âme lumineuse est venue embellir ce monde 🌸<br><br>
+Alors j’ai voulu créer quelque chose d’unique pour toi 💫
 </p>
 
-<div class="music-box">
-<h3>🎵 Choisis une musique</h3>
-<select id="musicSelect">
-<option value="music1.mp3">Romantique douce</option>
-<option value="music2.mp3">Chill vibes</option>
-<option value="music3.mp3">Happy birthday instrumental</option>
-</select><br>
-<button onclick="playMusic()">▶️ Jouer</button>
-<button onclick="pauseMusic()">⏸️ Pause</button>
-</div>
-
-<button onclick="showVideo()">Découvrir la surprise</button>
-</div>
-
-<!-- VIDEO -->
-<div class="section hidden" id="videoSection">
-<h1>Une petite vidéo pour toi 🎥</h1>
-
-<video controls>
+<!-- VIDEO DIRECTEMENT SOUS LE MESSAGE -->
+<video autoplay muted loop>
 <source src="video.mp4" type="video/mp4">
 </video>
 
-<button onclick="startQuiz()">Continuer</button>
+<!-- MUSIC -->
+<div class="music-box">
+<h3>🎵 Choisis ta musique</h3>
+<select id="musicSelect" onchange="autoPlayMusic()">
+<option value="">-- Sélectionner --</option>
+<option value="music1.mp3">Romantique douce</option>
+<option value="music2.mp3">Chill vibes</option>
+<option value="music3.mp3">Happy birthday instrumental</option>
+</select>
+</div>
+
+<button onclick="startQuiz()">Découvrir la surprise ✨</button>
+
 </div>
 
 <!-- QUIZ -->
 <div class="section hidden" id="quizSection">
-<h1>Petit Quiz Spécial ✨</h1>
+<h1>✨ Petit Quiz Spécial ✨</h1>
 <div id="quizContainer"></div>
 </div>
 
 <!-- FINAL -->
 <div class="section hidden" id="finalSection">
 <h1>🎉 Surprise Finale 🎉</h1>
+
 <p>
-Si cette petite surprise t’a fait sourire…  
+Merci d’avoir joué 💖<br><br>
+Si cette attention t’a fait sourire…<br>
 Peut-être que la prochaine conversation commence ici 💬✨
 </p>
 
@@ -168,54 +168,47 @@ Peut-être que la prochaine conversation commence ici 💬✨
 <a href="https://wa.me/TONNUMERO" target="_blank">
 <button>Me contacter sur WhatsApp</button>
 </a>
+
 </div>
 
 <audio id="bgMusic"></audio>
 
 <script>
 
-// MUSIC
+// MUSIC AUTO PLAY AFTER SELECTION
 let audio = document.getElementById("bgMusic");
 
-function playMusic(){
+function autoPlayMusic(){
 let selected = document.getElementById("musicSelect").value;
+if(selected !== ""){
 audio.src = selected;
 audio.play();
 }
-
-function pauseMusic(){
-audio.pause();
-}
-
-// NAVIGATION
-function showVideo(){
-document.getElementById("home").classList.add("hidden");
-document.getElementById("videoSection").classList.remove("hidden");
-}
-
-function startQuiz(){
-document.getElementById("videoSection").classList.add("hidden");
-document.getElementById("quizSection").classList.remove("hidden");
-loadQuestion();
 }
 
 // QUIZ
 let questions = [
 {
-question:"Si Ruth était une étoile ⭐ ?",
-options:["La plus brillante","La plus rare","Celle qui guide les autres"]
+question:"Si Ruth était une fleur 🌸 ?",
+options:["Une rose élégante","Une orchidée rare","Un lys délicat"]
 },
 {
-question:"Quel est le vrai charme ?",
-options:["La beauté","La douceur","L’authenticité"]
+question:"Quel mot décrit le mieux son énergie ?",
+options:["Lumineuse","Inspirante","Captivante"]
 },
 {
-question:"Quelle surprise est la plus mémorable ?",
-options:["Un cadeau","Un moment partagé","Une attention pensée spécialement"]
+question:"Quel type de surprise mérite une personne exceptionnelle ?",
+options:["Un simple cadeau","Un moment sincère","Une attention créée spécialement pour elle 💖"]
 }
 ];
 
 let currentQuestion = 0;
+
+function startQuiz(){
+document.getElementById("home").classList.add("hidden");
+document.getElementById("quizSection").classList.remove("hidden");
+loadQuestion();
+}
 
 function loadQuestion(){
 if(currentQuestion >= questions.length){
@@ -246,18 +239,23 @@ document.getElementById("finalSection").classList.remove("hidden");
 launchConfetti();
 }
 
-// CONFETTI
+// CONFETTI ANIMÉ
 function launchConfetti(){
-for(let i=0;i<80;i++){
+for(let i=0;i<100;i++){
 let conf = document.createElement("div");
 conf.style.position="fixed";
 conf.style.width="6px";
 conf.style.height="6px";
 conf.style.background="white";
-conf.style.top=Math.random()*window.innerHeight+"px";
+conf.style.top="-10px";
 conf.style.left=Math.random()*window.innerWidth+"px";
 conf.style.opacity=Math.random();
+conf.style.transition="3s linear";
 document.body.appendChild(conf);
+
+setTimeout(()=>{
+conf.style.top=window.innerHeight+"px";
+},50);
 }
 }
 
