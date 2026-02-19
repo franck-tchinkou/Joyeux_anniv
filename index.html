@@ -390,16 +390,22 @@
 <div class="petals" id="petals"></div>
 
 <!-- SCREEN 1 : Welcome -->
-<!-- SCREEN 1a : Play intro -->
-<div class="screen active play-screen" id="s1a">
+<!-- SCREEN 1 : Accueil avec musique -->
+<div class="screen active" id="s1">
+  <div class="flower">🌸</div>
   <div class="deco">✦ Un message pour toi ✦</div>
-  <h1 style="font-size:clamp(2rem,6vw,3.5rem)">Raissa,<br><em>écoute ça</em></h1>
-  <div class="play-circle" onclick="startMusic()">▶</div>
-  <p class="song-info" id="song-label">— Appuie pour lancer la musique —</p>
-  <button class="btn" id="btn-continue-music" style="opacity:0;pointer-events:none;transition:opacity 0.6s;" onclick="goTo('s1b')">Continuer vers la surprise →</button>
+  <h1>Bonjour,<br><em>Raissa</em></h1>
+  <div class="divider"></div>
+
+  <!-- Bouton Play -->
+  <button class="btn" id="btn-play" onclick="startMusic()" style="background:white;color:var(--rose-deep);border:1.5px solid var(--rose);box-shadow:none;margin-bottom:0.8rem;">▶ Appuyer pour lire</button>
+  <p id="song-label" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.85rem;color:var(--muted);margin-bottom:1.5rem;min-height:1.2em;"></p>
+
+  <!-- Bouton Continuer -->
+  <button class="btn" onclick="goTo('s1b')">Continuer vers la surprise →</button>
 </div>
 
-<!-- SCREEN 1b : Message -->
+<!-- SCREEN 1b : Message Raissa -->
 <div class="screen" id="s1b">
   <div class="flower">🌸</div>
   <div class="deco">✦ Un message pour toi ✦</div>
@@ -623,15 +629,11 @@
     audio.play().then(() => {
       musicPlaying = true;
       document.getElementById('music-toggle').style.display = 'flex';
-      document.getElementById('music-toggle').textContent = '🎵';
-      const btn = document.getElementById('btn-continue-music');
-      btn.style.opacity = '1';
-      btn.style.pointerEvents = 'auto';
-      document.querySelector('.play-circle').textContent = '⏸';
-      document.querySelector('.play-circle').onclick = toggleMusic;
+      document.getElementById('btn-play').textContent = '⏸ En cours de lecture';
+      document.getElementById('btn-play').onclick = toggleMusic;
       document.getElementById('song-label').textContent = '✦ Essence — Wizkid ft. Tems ✦';
     }).catch(() => {
-      document.getElementById('song-label').textContent = '⚠ Vérifie que le fichier MP3 est bien uploadé sur GitHub';
+      document.getElementById('song-label').textContent = '⚠ Fichier essence.mp3 introuvable';
     });
   }
 
@@ -640,12 +642,14 @@
       audio.pause();
       musicPlaying = false;
       document.getElementById('music-toggle').textContent = '🔇';
-      document.querySelector('.play-circle').textContent = '▶';
+      document.getElementById('btn-play').textContent = '▶ Reprendre la lecture';
+      document.getElementById('btn-play').onclick = startMusic;
     } else {
       audio.play();
       musicPlaying = true;
       document.getElementById('music-toggle').textContent = '🎵';
-      document.querySelector('.play-circle').textContent = '⏸';
+      document.getElementById('btn-play').textContent = '⏸ En cours de lecture';
+      document.getElementById('btn-play').onclick = toggleMusic;
     }
   }
 
@@ -738,7 +742,7 @@
     document.getElementById('btn4b').disabled = true;
     document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
     document.getElementById('sum-bonus').style.display = 'none';
-    goTo('s1a');
+    goTo('s1'); document.getElementById('btn-play').textContent = '▶ Appuyer pour lire'; document.getElementById('btn-play').onclick = startMusic; document.getElementById('song-label').textContent = '';
   }
 
   // ── Bonus questions ────────────────────────────────────
