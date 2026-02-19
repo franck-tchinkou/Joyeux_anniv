@@ -381,8 +381,8 @@
 <!-- Petal rain -->
 
 <!-- Audio player -->
-<audio id="bg-music" loop>
-  <source src="YOUR_SONG.mp3" type="audio/mpeg">
+<audio id="bg-music" loop preload="auto">
+  <source src="essence.mp3" type="audio/mpeg">
 </audio>
 
 <button class="music-btn" id="music-toggle" onclick="toggleMusic()" title="Musique">🎵</button>
@@ -629,10 +629,9 @@
       btn.style.pointerEvents = 'auto';
       document.querySelector('.play-circle').textContent = '⏸';
       document.querySelector('.play-circle').onclick = toggleMusic;
-      document.getElementById('song-label').textContent = '— En cours de lecture —';
+      document.getElementById('song-label').textContent = '✦ Essence — Wizkid ft. Tems ✦';
     }).catch(() => {
-      // fallback if autoplay blocked
-      alert('Active le son sur ton téléphone 🎵');
+      document.getElementById('song-label').textContent = '⚠ Vérifie que le fichier MP3 est bien uploadé sur GitHub';
     });
   }
 
@@ -641,10 +640,12 @@
       audio.pause();
       musicPlaying = false;
       document.getElementById('music-toggle').textContent = '🔇';
+      document.querySelector('.play-circle').textContent = '▶';
     } else {
       audio.play();
       musicPlaying = true;
       document.getElementById('music-toggle').textContent = '🎵';
+      document.querySelector('.play-circle').textContent = '⏸';
     }
   }
 
