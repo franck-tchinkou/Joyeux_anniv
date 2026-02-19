@@ -623,21 +623,28 @@
 
   // ── Music ──────────────────────────────────────────────
   let musicPlaying = false;
-  const audio = document.getElementById('bg-music');
+
+  function getAudio() {
+    return document.getElementById('bg-music');
+  }
 
   function startMusic() {
+    const audio = getAudio();
+    if (!audio) return;
     audio.play().then(() => {
       musicPlaying = true;
       document.getElementById('music-toggle').style.display = 'flex';
       document.getElementById('btn-play').textContent = '⏸ En cours de lecture';
       document.getElementById('btn-play').onclick = toggleMusic;
       document.getElementById('song-label').textContent = '✦ Essence — Wizkid ft. Tems ✦';
-    }).catch(() => {
-      document.getElementById('song-label').textContent = '⚠ Fichier essence.mp3 introuvable';
+    }).catch((e) => {
+      document.getElementById('song-label').textContent = '⚠ ' + e.message;
     });
   }
 
   function toggleMusic() {
+    const audio = getAudio();
+    if (!audio) return;
     if (musicPlaying) {
       audio.pause();
       musicPlaying = false;
