@@ -374,6 +374,78 @@
     font-style: italic;
   }
 
+
+  /* Memory Game */
+  .game-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.6rem;
+    width: 100%;
+    max-width: 360px;
+    margin: 1rem auto 1.5rem;
+  }
+
+  .card {
+    aspect-ratio: 1;
+    border-radius: 12px;
+    cursor: pointer;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.4s ease;
+  }
+
+  .card.flipped { transform: rotateY(180deg); }
+  .card.matched { transform: rotateY(180deg); cursor: default; }
+
+  .card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    font-size: 1.6rem;
+  }
+
+  .card-back {
+    background: linear-gradient(135deg, var(--rose), #f4c8cc);
+    border: 1.5px solid var(--rose-deep);
+  }
+
+  .card-back::after {
+    content: '🌸';
+    font-size: 1.4rem;
+  }
+
+  .card-front {
+    background: white;
+    border: 1.5px solid var(--rose);
+    transform: rotateY(180deg);
+  }
+
+  .card.matched .card-front {
+    background: linear-gradient(135deg, #fde8ea, #fff0f1);
+    border-color: var(--rose-deep);
+  }
+
+  .game-score {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .game-win {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    animation: fadeIn 0.6s ease;
+  }
+
 </style>
 </head>
 <body>
@@ -413,7 +485,79 @@
   <div class="divider"></div>
   <p class="lead">Ces fleurs arrivent avec un peu de retard — mais les sentiments, eux, n'ont jamais attendu. J'ai quelque chose à te proposer…</p>
   <p class="note-pied">💛 J'espère que ton pied va mieux. Prends le temps qu'il te faut.</p>
-  <button class="btn" onclick="goTo('s2')">Voir la surprise →</button>
+  <button class="btn" onclick="goTo('s1c')">Continuer →</button>
+</div>
+
+<!-- SCREEN 1c : Photo + texte flatteur -->
+<div class="screen" id="s1c">
+  <div class="deco">✦ Toi ✦</div>
+
+  <!-- Cadre photo -->
+  <div style="
+    width: 220px;
+    height: 270px;
+    border-radius: 24px;
+    border: 2px solid var(--rose);
+    background: var(--warm);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.8rem;
+    box-shadow: 0 8px 30px rgba(196,125,133,0.15);
+    position: relative;
+    overflow: hidden;
+  ">
+    <img src="raissa.jpg" alt="Raissa"
+      style="width:100%;height:100%;object-fit:cover;border-radius:22px;display:block;"
+      onerror="this.style.display='none'; document.getElementById('photo-placeholder').style.display='flex';"
+    >
+    <div id="photo-placeholder" style="
+      display:none;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:0.5rem;
+      padding:1rem;
+      text-align:center;
+    ">
+      <span style="font-size:3rem;">🌸</span>
+      <span style="font-family:'Cormorant Garamond',serif;font-size:0.85rem;color:var(--muted);font-style:italic;">Ajoute ta photo<br>nommée <strong>raissa.jpg</strong></span>
+    </div>
+  </div>
+
+  <h1 style="font-size:clamp(2rem,6vw,3.2rem)"><em>Raissa</em></h1>
+  <div class="divider"></div>
+
+  <p class="lead" style="max-width:340px;font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--text);line-height:1.9;">
+    Il y a des personnes qu'on remarque tout de suite —<br>
+    pas à cause du bruit qu'elles font,<br>
+    mais à cause de la lumière qu'elles portent.<br>
+    Toi, tu en fais partie.<br><br>
+    Ton sourire, ta façon d'être,<br>
+    tout en toi mérite d'être célébré.<br>
+    Alors aujourd'hui, c'est pour toi. 🌸
+  </p>
+
+  <button class="btn" onclick="goTo('s1d'); initGame();" style="margin-top:0.5rem;">Continuer →</button>
+</div>
+
+<!-- SCREEN 1d : Jeu mémoire -->
+<div class="screen" id="s1d">
+  <div class="deco">✦ Un petit jeu pour toi ✦</div>
+  <h1 style="font-size:clamp(1.8rem,5vw,3rem)">Retrouve<br><em>les paires</em></h1>
+
+  <div class="game-score">Paires trouvées : <span id="pairs-found">0</span> / 4</div>
+
+  <div class="game-grid" id="game-grid"></div>
+
+  <div class="game-win" id="game-win">
+    <div style="font-size:3rem;">💕</div>
+    <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--text);">
+      Bravo Raissa ! Tu as tout trouvé 🌸
+    </p>
+    <button class="btn" onclick="goTo('s2')">Continuer vers la surprise →</button>
+  </div>
 </div>
 
 <!-- SCREEN 2 : Date -->
@@ -425,7 +569,7 @@
   </div>
   <div class="deco">✦ Étape 1 ✦</div>
   <h1>Choisir<br><em>le jour</em></h1>
-  <p class="lead">Quand seras-tu disponible pour qu'on passe du bon temps ensemble ?</p>
+  <p class="lead">Quand seras-tu disponible pour qu'on passe un moment ensemble ?</p>
   <div class="input-group">
     <label>La date idéale 📅</label>
     <input type="date" id="date-input">
@@ -560,7 +704,7 @@
 <div class="screen" id="s5">
   <div class="heart-burst">💗</div>
   <div class="deco">✦ C'est noté ✦</div>
-  <h1>Notre<br><em>prochaine fois</em></h1>
+  <h1>J'ai hâte<br><em>qu'on y soit</em></h1>
   <div class="divider"></div>
   <div class="summary-card">
     <div class="summary-item">
@@ -621,6 +765,7 @@
 
 <script>
 
+
   // ── Music ──────────────────────────────────────────────
   let musicPlaying = false;
 
@@ -675,6 +820,22 @@
           d.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
       }
       document.getElementById('sum-city').textContent = selectedCity || '—';
+
+      // Envoi automatique à Formspree
+      fetch('https://formspree.io/f/mjgeeyjy', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          date: dateVal,
+          ville: selectedCity,
+          activite: selectedActivity,
+          energie: bonusAnswers.energie || 'N/A',
+          ambiance: bonusAnswers.ambiance || 'N/A',
+          cuisine: bonusAnswers.cuisine || 'N/A',
+          soir: bonusAnswers.soir || 'N/A'
+        })
+      }).catch(() => {});
+
       if (selectedActivity === 'Moi je décide 😏') {
         document.getElementById('sum-activity').textContent = 'Moi je décide 😏';
         const bonusEl = document.getElementById('sum-bonus');
@@ -702,7 +863,9 @@
     }
   }
 
-  // ── Petals ─────────────────────────────────────────────
+  
+  document.addEventListener("DOMContentLoaded", function() {
+// ── Petals ─────────────────────────────────────────────
   const emojis = ['🌸', '🌷', '🌺', '✿', '❀'];
   const container = document.getElementById('petals');
   for (let i = 0; i < 18; i++) {
@@ -761,6 +924,84 @@
       document.getElementById('btn4b').disabled = false;
     }
   }
+
+  // ── Memory Game ────────────────────────────────────────
+  const gameEmojis = ['💕', '🌹', '💌', '✨'];
+  let gameCards = [];
+  let flippedCards = [];
+  let matchedPairs = 0;
+  let canFlip = true;
+
+  function initGame() {
+    matchedPairs = 0;
+    flippedCards = [];
+    canFlip = true;
+    document.getElementById('pairs-found').textContent = '0';
+    document.getElementById('game-win').style.display = 'none';
+
+    const pairs = [...gameEmojis, ...gameEmojis];
+    // shuffle
+    pairs.sort(() => Math.random() - 0.5);
+
+    const grid = document.getElementById('game-grid');
+    grid.innerHTML = '';
+
+    pairs.forEach((emoji, i) => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.dataset.emoji = emoji;
+      card.dataset.index = i;
+      card.innerHTML = `
+        <div class="card-face card-back"></div>
+        <div class="card-face card-front">${emoji}</div>
+      `;
+      card.addEventListener('click', () => flipCard(card));
+      grid.appendChild(card);
+    });
+
+    gameCards = Array.from(grid.querySelectorAll('.card'));
+  }
+
+  function flipCard(card) {
+    if (!canFlip) return;
+    if (card.classList.contains('flipped') || card.classList.contains('matched')) return;
+    if (flippedCards.length >= 2) return;
+
+    card.classList.add('flipped');
+    flippedCards.push(card);
+
+    if (flippedCards.length === 2) {
+      canFlip = false;
+      checkMatch();
+    }
+  }
+
+  function checkMatch() {
+    const [a, b] = flippedCards;
+    if (a.dataset.emoji === b.dataset.emoji) {
+      a.classList.add('matched');
+      b.classList.add('matched');
+      matchedPairs++;
+      document.getElementById('pairs-found').textContent = matchedPairs;
+      flippedCards = [];
+      canFlip = true;
+      if (matchedPairs === 4) {
+        setTimeout(() => {
+          document.getElementById('game-win').style.display = 'flex';
+        }, 500);
+      }
+    } else {
+      setTimeout(() => {
+        a.classList.remove('flipped');
+        b.classList.remove('flipped');
+        flippedCards = [];
+        canFlip = true;
+      }, 900);
+    }
+  }
+
+
+  });
 </script>
 </body>
 </html>
