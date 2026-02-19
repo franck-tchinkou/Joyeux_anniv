@@ -3,938 +3,752 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday Ruth Patience 💖</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<title>Pour toi, Raissa 🌸</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  :root {
+    --rose: #e8b4b8;
+    --rose-deep: #c47d85;
+    --cream: #fdf6f0;
+    --warm: #f5e6d8;
+    --text: #3a2a2a;
+    --muted: #9a7070;
+  }
 
-:root {
-  --rose: #e8537a;
-  --rose-light: #f9a8c0;
-  --rose-pale: #fde8ef;
-  --mauve: #7a1f4a;
-  --gold: #d4a054;
-  --cream: #fff8f2;
-}
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+  body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
 
-body {
-  font-family: 'Lato', sans-serif;
-  background: var(--cream);
-  color: var(--mauve);
-  overflow-x: hidden;
-}
+  /* Petal rain */
+  .petals {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
 
-/* ─── CONFETTI ─── */
-.confetti-piece {
-  position: fixed;
-  width: 8px; height: 8px;
-  top: -20px;
-  border-radius: 2px;
-  pointer-events: none;
-  z-index: 9999;
-  animation: confettiFall linear forwards;
-}
-@keyframes confettiFall {
-  to { transform: translateY(110vh) rotate(720deg); opacity: 0; }
-}
+  .petal {
+    position: absolute;
+    top: -30px;
+    font-size: 1.2rem;
+    opacity: 0;
+    animation: fall linear infinite;
+  }
 
-/* ─── PAGES ─── */
-.page {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 40px 24px;
-  position: relative;
-}
+  @keyframes fall {
+    0% { opacity: 0; transform: translateY(0) rotate(0deg); }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.4; }
+    100% { opacity: 0; transform: translateY(110vh) rotate(360deg); }
+  }
 
-.hidden { display: none !important; }
+  /* Screens */
+  .screen {
+    display: none;
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    padding: 2rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    animation: fadeIn 0.8s ease both;
+  }
 
-/* ── PAGE 1 : ACCUEIL ── */
-#page-home {
-  background: linear-gradient(160deg, #fff0f5 0%, #fce4ec 50%, #f8bbd0 100%);
-}
+  .screen.active { display: flex; }
 
-.petals-bg {
-  position: absolute; inset: 0;
-  overflow: hidden; pointer-events: none; z-index: 0;
-}
-.petal {
-  position: absolute;
-  font-size: 1.4rem;
-  opacity: 0.25;
-  animation: drift linear infinite;
-}
-@keyframes drift {
-  from { transform: translateY(-60px) rotate(0deg); opacity: 0.3; }
-  to   { transform: translateY(110vh) rotate(360deg); opacity: 0; }
-}
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
-.home-content {
-  position: relative; z-index: 1;
-  display: flex; flex-direction: column; align-items: center;
-  animation: fadeUp 1s ease both;
-}
-@keyframes fadeUp {
-  from { opacity:0; transform: translateY(30px); }
-  to   { opacity:1; transform: translateY(0); }
-}
+  /* Decorative line */
+  .deco {
+    color: var(--rose-deep);
+    letter-spacing: 0.3em;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    font-family: 'Jost', sans-serif;
+  }
 
-.subtitle {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  font-size: 0.95rem;
-  color: var(--rose);
-  letter-spacing: 2px;
-  margin-bottom: 10px;
-}
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 8vw, 5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--text);
+    margin-bottom: 1.2rem;
+  }
 
-h1.hero-title {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2rem, 6vw, 3.2rem);
-  line-height: 1.2;
-  margin-bottom: 6px;
-  text-align: center;
-}
-h1.hero-title span { color: var(--rose); }
+  h1 em {
+    color: var(--rose-deep);
+    font-style: italic;
+  }
 
-.divider {
-  width: 60px; height: 2px;
-  background: linear-gradient(90deg, var(--rose-light), var(--gold));
-  border-radius: 2px;
-  margin: 18px auto;
-}
+  p.lead {
+    font-size: 1rem;
+    color: var(--muted);
+    max-width: 380px;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+  }
 
-.hero-text {
-  font-size: 1rem;
-  line-height: 1.8;
-  max-width: 480px;
-  text-align: center;
-  color: #7a3a55;
-  margin-bottom: 24px;
-}
+  /* Flower icon */
+  .flower {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    animation: sway 3s ease-in-out infinite;
+  }
 
-/* PHOTO SLIDER */
-.slider-frame {
-  position: relative;
-  width: 100%;
-  max-width: 320px;
-  margin-bottom: 24px;
-}
-.slider-frame::before {
-  content: '';
-  position: absolute;
-  inset: -6px;
-  border-radius: 26px;
-  background: linear-gradient(135deg, var(--rose), var(--gold), var(--rose-light));
-  z-index: 0;
-  animation: borderPulse 3s ease-in-out infinite;
-}
-@keyframes borderPulse {
-  0%,100% { opacity: 1; }
-  50% { opacity: 0.7; }
-}
-.slider-inner {
-  position: relative; z-index: 1;
-  width: 100%;
-  border-radius: 20px;
-  overflow: hidden;
-  aspect-ratio: 4/5;
-  background: #f5d0de;
-}
-.slide {
-  position: absolute; inset: 0;
-  opacity: 0;
-  transition: opacity 0.8s ease, transform 0.8s ease;
-  transform: scale(1.04);
-}
-.slide.active {
-  opacity: 1;
-  transform: scale(1);
-}
-.slide img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  display: block;
-}
-.slide-placeholder {
-  width: 100%; height: 100%;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  background: linear-gradient(135deg, #fde8ef, #f9c8d8);
-  color: var(--mauve);
-  font-size: 3rem;
-  gap: 10px;
-}
-.slide-placeholder span {
-  font-family: 'Lato', sans-serif;
-  font-size: 0.8rem;
-  letter-spacing: 1px;
-  opacity: 0.6;
-}
-/* Dots navigation */
-.slider-dots {
-  position: absolute;
-  bottom: 10px; left: 0; right: 0;
-  display: flex; justify-content: center; gap: 7px;
-  z-index: 2;
-}
-.s-dot {
-  width: 7px; height: 7px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.5);
-  cursor: pointer;
-  transition: all 0.3s;
-  border: none;
-  padding: 0;
-}
-.s-dot.active {
-  background: white;
-  transform: scale(1.3);
-}
-/* Arrows */
-.slider-arrow {
-  position: absolute;
-  top: 50%; transform: translateY(-50%);
-  z-index: 2;
-  background: rgba(255,255,255,0.7);
-  border: none;
-  border-radius: 50%;
-  width: 32px; height: 32px;
-  font-size: 1rem;
-  cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  transition: background 0.2s;
-  backdrop-filter: blur(4px);
-}
-.slider-arrow:hover { background: white; }
-.slider-arrow.prev { left: 10px; }
-.slider-arrow.next { right: 10px; }
+  @keyframes sway {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+  }
 
-/* MUSIC BUTTON */
-.music-btn {
-  display: flex; align-items: center; gap: 10px;
-  padding: 12px 28px;
-  border: 2px solid var(--rose);
-  border-radius: 50px;
-  background: transparent;
-  color: var(--rose);
-  font-family: 'Lato', sans-serif;
-  font-size: 0.95rem;
-  font-weight: 600;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: all 0.3s;
-  margin-bottom: 14px;
-}
-.music-btn:hover, .music-btn.playing {
-  background: var(--rose);
-  color: white;
-}
-.music-icon { font-size: 1.2rem; }
-.eq-bars {
-  display: none; gap: 2px; align-items: flex-end; height: 16px;
-}
-.music-btn.playing .eq-bars { display: flex; }
-.music-btn.playing .music-label::before { content: 'En lecture '; }
-.eq-bar {
-  width: 3px; background: white; border-radius: 2px;
-  animation: eq 0.6s ease-in-out infinite alternate;
-}
-.eq-bar:nth-child(2) { animation-delay: 0.2s; }
-.eq-bar:nth-child(3) { animation-delay: 0.4s; }
-@keyframes eq {
-  from { height: 4px; }
-  to   { height: 14px; }
-}
+  /* Cards / Options */
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 2rem;
+  }
 
-/* CTA BUTTON */
-.btn-primary {
-  padding: 14px 36px;
-  background: linear-gradient(135deg, var(--rose), #c94070);
-  color: white;
-  border: none;
-  border-radius: 50px;
-  font-size: 1rem;
-  font-family: 'Lato', sans-serif;
-  font-weight: 700;
-  letter-spacing: 1px;
-  cursor: pointer;
-  box-shadow: 0 6px 24px rgba(232, 83, 122, 0.45);
-  transition: all 0.3s;
-}
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(232, 83, 122, 0.55);
-}
+  .option-card {
+    background: white;
+    border: 1.5px solid var(--rose);
+    border-radius: 16px;
+    padding: 1rem 1.4rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
 
-/* ── PAGE 2 : QUIZ ── */
-#page-quiz {
-  background: linear-gradient(160deg, #fff8f2 0%, #fce4ec 100%);
-}
+  .option-card:hover, .option-card.selected {
+    background: var(--rose);
+    border-color: var(--rose-deep);
+    transform: translateX(6px);
+  }
 
-.quiz-wrap {
-  width: 100%; max-width: 520px;
-  animation: fadeUp 0.6s ease both;
-}
+  .option-card.selected {
+    background: linear-gradient(135deg, var(--rose), #f4c8cc);
+  }
 
-.quiz-progress {
-  display: flex; gap: 8px; justify-content: center;
-  margin-bottom: 28px;
-}
-.progress-dot {
-  width: 10px; height: 10px;
-  border-radius: 50%;
-  background: #f0c4d4;
-  transition: background 0.4s;
-}
-.progress-dot.done { background: var(--rose); }
+  .option-icon { font-size: 1.5rem; }
 
-.quiz-card {
-  background: white;
-  border-radius: 24px;
-  padding: 32px 28px;
-  box-shadow: 0 8px 40px rgba(180, 60, 100, 0.12);
-  text-align: center;
-}
+  .option-text h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--text);
+  }
 
-.quiz-q-num {
-  font-size: 0.8rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--rose-light);
-  margin-bottom: 10px;
-}
+  .option-text p {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-top: 2px;
+  }
 
-.quiz-question {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.3rem;
-  margin-bottom: 26px;
-  line-height: 1.5;
-  color: var(--mauve);
-}
+  /* Input fields */
+  .input-group {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 1.2rem;
+    text-align: left;
+  }
 
-.quiz-options { display: flex; flex-direction: column; gap: 12px; }
+  label {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
 
-.quiz-opt {
-  padding: 13px 20px;
-  border-radius: 50px;
-  border: 2px solid #f5d0de;
-  background: var(--cream);
-  color: var(--mauve);
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: all 0.25s;
-  font-family: 'Lato', sans-serif;
-}
-.quiz-opt:hover {
-  background: var(--rose);
-  border-color: var(--rose);
-  color: white;
-  transform: scale(1.02);
-}
+  input[type="text"], input[type="date"], select {
+    width: 100%;
+    padding: 0.9rem 1.2rem;
+    border: 1.5px solid var(--rose);
+    border-radius: 12px;
+    background: white;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s;
+  }
 
-/* ── PAGE 3 : JEU MÉMOIRE ── */
-#page-game {
-  background: linear-gradient(160deg, #fce4ec 0%, #f8bbd0 100%);
-}
+  input:focus, select:focus {
+    border-color: var(--rose-deep);
+  }
 
-.game-wrap {
-  width: 100%; max-width: 480px;
-  text-align: center;
-  animation: fadeUp 0.6s ease both;
-}
+  /* Button */
+  .btn {
+    background: linear-gradient(135deg, var(--rose-deep), #d4959b);
+    color: white;
+    border: none;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(196, 125, 133, 0.3);
+  }
 
-.game-wrap h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.6rem;
-  margin-bottom: 8px;
-}
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(196, 125, 133, 0.45);
+  }
 
-.game-wrap p { margin-bottom: 20px; color: #7a3a55; }
+  .btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
 
-.game-board {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  max-width: 360px;
-  margin: 0 auto 24px;
-}
+  /* Progress dots */
+  .dots {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
 
-.card {
-  aspect-ratio: 1;
-  border-radius: 16px;
-  cursor: pointer;
-  position: relative;
-  transform-style: preserve-3d;
-  transition: transform 0.45s ease;
-}
-.card.flipped { transform: rotateY(180deg); }
+  .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--rose);
+    transition: all 0.3s;
+  }
 
-.card-face {
-  position: absolute; inset: 0;
-  border-radius: 16px;
-  display: flex; align-items: center; justify-content: center;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-.card-back {
-  background: linear-gradient(135deg, #f9a8c0, #e8537a);
-  font-size: 1.3rem;
-}
-.card-front {
-  background: white;
-  font-size: 1.8rem;
-  transform: rotateY(180deg);
-  box-shadow: 0 4px 16px rgba(180,60,100,0.15);
-}
-.card.matched .card-front {
-  background: linear-gradient(135deg, #fde8ef, #f9c8d8);
-}
+  .dot.active {
+    background: var(--rose-deep);
+    transform: scale(1.3);
+  }
 
-.game-score {
-  font-size: 0.9rem;
-  color: #a05070;
-  margin-bottom: 6px;
-}
+  /* Final screen */
+  .summary-card {
+    background: white;
+    border-radius: 24px;
+    padding: 2rem;
+    max-width: 380px;
+    width: 100%;
+    box-shadow: 0 8px 40px rgba(196,125,133,0.15);
+    margin-bottom: 2rem;
+    text-align: left;
+  }
 
-/* ── PAGE 4 : FINALE ── */
-#page-final {
-  background: linear-gradient(160deg, #2a0618 0%, #5c0f30 60%, #8a1a4e 100%);
-  color: white;
-}
+  .summary-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--warm);
+  }
 
-#page-final h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(1.8rem, 5vw, 2.8rem);
-  color: var(--rose-light);
-  margin-bottom: 10px;
-  text-align: center;
-  animation: fadeUp 0.8s ease both;
-}
+  .summary-item:last-child { border-bottom: none; }
 
-.final-msg {
-  font-size: 1rem;
-  line-height: 1.9;
-  text-align: center;
-  max-width: 420px;
-  color: #f5c0d5;
-  margin-bottom: 28px;
-  animation: fadeUp 0.8s 0.2s ease both;
-}
+  .summary-icon { font-size: 1.3rem; }
 
-/* Vidéo finale */
-.final-video-frame {
-  position: relative;
-  width: 100%;
-  max-width: 340px;
-  margin-bottom: 28px;
-  animation: fadeUp 0.8s 0.3s ease both;
-}
-.final-video-frame::before {
-  content: '';
-  position: absolute;
-  inset: -5px;
-  border-radius: 22px;
-  background: linear-gradient(135deg, rgba(232,83,122,0.6), rgba(212,160,84,0.6));
-  z-index: 0;
-}
-.final-video-frame video {
-  position: relative; z-index: 1;
-  width: 100%;
-  border-radius: 18px;
-  display: block;
-}
+  .summary-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    margin-bottom: 3px;
+  }
 
-.qr-frame {
-  background: white;
-  padding: 14px;
-  border-radius: 20px;
-  margin-bottom: 24px;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-  animation: fadeUp 0.8s 0.4s ease both;
-}
-.qr-frame img {
-  width: 160px; height: 160px;
-  border-radius: 10px;
-  display: block;
-}
-.qr-label {
-  font-size: 0.75rem;
-  color: var(--mauve);
-  margin-top: 8px;
-  text-align: center;
-  font-weight: 600;
-  letter-spacing: 1px;
-}
+  .summary-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: var(--text);
+  }
 
-.btn-whatsapp {
-  display: flex; align-items: center; gap: 10px;
-  padding: 14px 32px;
-  background: #25D366;
-  color: white;
-  border: none;
-  border-radius: 50px;
-  font-size: 1rem;
-  font-weight: 700;
-  font-family: 'Lato', sans-serif;
-  cursor: pointer;
-  text-decoration: none;
-  box-shadow: 0 6px 24px rgba(37, 211, 102, 0.4);
-  transition: all 0.3s;
-  margin-bottom: 16px;
-  animation: fadeUp 0.8s 0.6s ease both;
-}
-.btn-whatsapp:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(37, 211, 102, 0.55);
-}
+  .heart-burst {
+    font-size: 4rem;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
 
-.btn-back {
-  padding: 11px 28px;
-  border: 2px solid rgba(255,255,255,0.3);
-  border-radius: 50px;
-  background: transparent;
-  color: rgba(255,255,255,0.7);
-  font-size: 0.9rem;
-  font-family: 'Lato', sans-serif;
-  cursor: pointer;
-  transition: all 0.3s;
-  animation: fadeUp 0.8s 0.7s ease both;
-}
-.btn-back:hover {
-  background: rgba(255,255,255,0.1);
-  color: white;
-  border-color: rgba(255,255,255,0.6);
-}
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+  }
 
-/* Page title shared */
-.page-title {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(1.5rem, 4vw, 2.2rem);
-  margin-bottom: 6px;
-  text-align: center;
-}
-.page-sub {
-  font-size: 0.95rem;
-  color: #a05070;
-  margin-bottom: 24px;
-  text-align: center;
-}
+  /* Divider */
+  .divider {
+    width: 60px;
+    height: 1px;
+    background: var(--rose);
+    margin: 1.5rem auto;
+  }
+
+  /* Disclaimer pied de blessure */
+  .note-pied {
+    font-size: 0.8rem;
+    color: var(--rose-deep);
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    max-width: 300px;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Music button */
+  .music-btn {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 100;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: white;
+    border: 1.5px solid var(--rose);
+    color: var(--rose-deep);
+    font-size: 1.3rem;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(196,125,133,0.2);
+    transition: all 0.3s;
+  }
+  .music-btn:hover { transform: scale(1.1); }
+
+  /* Play screen overlay */
+  .play-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .play-circle {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--rose), #f4c8cc);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    cursor: pointer;
+    box-shadow: 0 8px 30px rgba(196,125,133,0.35);
+    transition: all 0.3s;
+    animation: breathe 2.5s ease-in-out infinite;
+  }
+
+  .play-circle:hover { transform: scale(1.08); }
+
+  @keyframes breathe {
+    0%, 100% { box-shadow: 0 8px 30px rgba(196,125,133,0.35); }
+    50% { box-shadow: 0 8px 50px rgba(196,125,133,0.6); }
+  }
+
+  .song-info {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+
 </style>
 </head>
 <body>
 
-<!-- ═══════════ PAGE 1 : ACCUEIL ═══════════ -->
-<div class="page" id="page-home">
-  <div class="petals-bg" id="petalsContainer"></div>
+<!-- Petal rain -->
 
-  <div class="home-content">
-    <div class="subtitle">✦ une attention sincère, rien que pour toi ✦</div>
+<!-- Audio player -->
+<audio id="bg-music" loop>
+  <source src="YOUR_SONG.mp3" type="audio/mpeg">
+</audio>
 
-    <h1 class="hero-title">
-      Joyeux Anniversaire<br><span>Ruth Patience</span>
-    </h1>
+<button class="music-btn" id="music-toggle" onclick="toggleMusic()" title="Musique">🎵</button>
 
-    <div class="divider"></div>
+<div class="petals" id="petals"></div>
 
-    <p class="hero-text">
-      Il y a des personnes que l'on croise et qui laissent,<br>
-      sans effort, une empreinte durable.<br><br>
-      Aujourd'hui est le jour où tu es venue au monde —<br>
-      et le monde en est, sans aucun doute, plus intéressant.<br><br>
-      J'ai voulu marquer ce moment à ma façon.
-    </p>
+<!-- SCREEN 1 : Welcome -->
+<!-- SCREEN 1a : Play intro -->
+<div class="screen active play-screen" id="s1a">
+  <div class="deco">✦ Un message pour toi ✦</div>
+  <h1 style="font-size:clamp(2rem,6vw,3.5rem)">Raissa,<br><em>écoute ça</em></h1>
+  <div class="play-circle" onclick="startMusic()">▶</div>
+  <p class="song-info" id="song-label">— Appuie pour lancer la musique —</p>
+  <button class="btn" id="btn-continue-music" style="opacity:0;pointer-events:none;transition:opacity 0.6s;" onclick="goTo('s1b')">Continuer vers la surprise →</button>
+</div>
 
-    <!-- Slider 3 photos -->
-    <div class="slider-frame">
-      <div class="slider-inner" id="slider">
-        <div class="slide active">
-          <img src="photo1.jpeg" alt="Ruth Patience" onerror="this.parentElement.innerHTML='<div class=&quot;slide-placeholder&quot;>🌸<span>photo1.jpeg</span></div>'">
-        </div>
-        <div class="slide">
-          <img src="photo2.jpeg" alt="Ruth Patience" onerror="this.parentElement.innerHTML='<div class=&quot;slide-placeholder&quot;>💖<span>photo2.jpeg</span></div>'">
-        </div>
-        <div class="slide">
-          <img src="photo3.jpeg" alt="Ruth Patience" onerror="this.parentElement.innerHTML='<div class=&quot;slide-placeholder&quot;>✨<span>photo3.jpeg</span></div>'">
-        </div>
-        <button class="slider-arrow prev" onclick="slideMove(-1)">&#x2039;</button>
-        <button class="slider-arrow next" onclick="slideMove(1)">&#x203a;</button>
-        <div class="slider-dots" id="sliderDots"></div>
+<!-- SCREEN 1b : Message -->
+<div class="screen" id="s1b">
+  <div class="flower">🌸</div>
+  <div class="deco">✦ Un message pour toi ✦</div>
+  <h1>Bonjour,<br><em>Raissa</em></h1>
+  <div class="divider"></div>
+  <p class="lead">Ces fleurs arrivent avec un peu de retard — mais les sentiments, eux, n'ont jamais attendu. J'ai quelque chose à te proposer…</p>
+  <p class="note-pied">💛 J'espère que ton pied va mieux. Prends le temps qu'il te faut.</p>
+  <button class="btn" onclick="goTo('s2')">Voir la surprise →</button>
+</div>
+
+<!-- SCREEN 2 : Date -->
+<div class="screen" id="s2">
+  <div class="dots">
+    <div class="dot active"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+  </div>
+  <div class="deco">✦ Étape 1 ✦</div>
+  <h1>Choisir<br><em>le jour</em></h1>
+  <p class="lead">Quand seras-tu disponible pour qu'on passe du bon temps ensemble ?</p>
+  <div class="input-group">
+    <label>La date idéale 📅</label>
+    <input type="date" id="date-input">
+  </div>
+  <button class="btn" id="btn2" onclick="goTo('s3')" disabled>Continuer →</button>
+</div>
+
+<!-- SCREEN 3 : Ville -->
+<div class="screen" id="s3">
+  <div class="dots">
+    <div class="dot"></div>
+    <div class="dot active"></div>
+    <div class="dot"></div>
+  </div>
+  <div class="deco">✦ Étape 2 ✦</div>
+  <h1>Choisir<br><em>le lieu</em></h1>
+  <p class="lead">Dans quelle ville tu voudrais qu'on se retrouve ?</p>
+  <div class="options" id="city-options">
+    <div class="option-card" onclick="selectCity(this, 'Paris')">
+      <span class="option-icon">🗼</span>
+      <div class="option-text">
+        <h3>Paris</h3>
+        <p>La ville lumière, pour une soirée inoubliable</p>
       </div>
     </div>
-
-    <!-- Bouton Play Musique -->
-    <button class="music-btn" id="musicBtn" onclick="toggleMusic()">
-      <span class="music-icon">🎵</span>
-      <span class="music-label">Lancer la musique</span>
-      <div class="eq-bars">
-        <div class="eq-bar"></div>
-        <div class="eq-bar"></div>
-        <div class="eq-bar"></div>
+    <div class="option-card" onclick="selectCity(this, 'Limoges')">
+      <span class="option-icon">🌿</span>
+      <div class="option-text">
+        <h3>Limoges</h3>
+        <p>Cosy et intime, une belle soirée à deux</p>
       </div>
-    </button>
-
-    <button class="btn-primary" onclick="goTo('quiz')">
-      Continuer →
-    </button>
-  </div>
-</div>
-
-<!-- ═══════════ PAGE 2 : QUIZ ═══════════ -->
-<div class="page hidden" id="page-quiz">
-  <div class="quiz-wrap">
-    <div class="page-title">Un petit jeu rien que pour toi 🎂</div>
-    <p class="page-sub">4 questions légères, pas de prise de tête — juste du plaisir.</p>
-
-    <div class="quiz-progress" id="quizProgress"></div>
-
-    <div class="quiz-card" id="quizCard">
-      <div class="quiz-q-num" id="quizQNum"></div>
-      <div class="quiz-question" id="quizQuestion"></div>
-      <div class="quiz-options" id="quizOptions"></div>
     </div>
   </div>
+  <button class="btn" id="btn3" onclick="goTo('s4')" disabled>Continuer →</button>
 </div>
 
-<!-- ═══════════ PAGE 3 : JEU MÉMOIRE ═══════════ -->
-<div class="page hidden" id="page-game">
-  <div class="game-wrap">
-    <div class="page-title">Presque là… 🎁</div>
-    <p>Un petit jeu de mémoire pour finir — retrouve les quatre paires cachées.</p>
-
-    <div class="game-score">Paires trouvées : <strong id="pairesCount">0</strong> / 4</div>
-    <div class="game-board" id="gameBoard"></div>
+<!-- SCREEN 4 : Activité -->
+<div class="screen" id="s4">
+  <div class="dots">
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot active"></div>
   </div>
+  <div class="deco">✦ Étape 3 ✦</div>
+  <h1>L'ambiance<br><em>du soir</em></h1>
+  <p class="lead">Qu'est-ce qui te ferait le plus plaisir pour notre soirée ?</p>
+  <div class="options" id="activity-options">
+    <div class="option-card" onclick="selectActivity(this, 'Un cocktail & bonne ambiance 🍹')">
+      <span class="option-icon">🍹</span>
+      <div class="option-text">
+        <h3>Cocktails & ambiance</h3>
+        <p>Un bar sympa où parler et rire</p>
+      </div>
+    </div>
+    <div class="option-card" onclick="selectActivity(this, 'Un dîner + sortie après 🌙')">
+      <span class="option-icon">🌙</span>
+      <div class="option-text">
+        <h3>Dîner + soirée</h3>
+        <p>On mange bien, puis on prolonge la nuit</p>
+      </div>
+    </div>
+    <div class="option-card" onclick="selectActivity(this, 'Une soirée Netflix & détente 🎬')">
+      <span class="option-icon">🎬</span>
+      <div class="option-text">
+        <h3>Soirée Netflix</h3>
+        <p>Cozy, un bon film et toi — rien de mieux</p>
+      </div>
+    </div>
+    <div class="option-card" onclick="selectActivity(this, 'Moi je décide 😏')">
+      <span class="option-icon">😏</span>
+      <div class="option-text">
+        <h3>Moi je décide</h3>
+        <p>Fais-moi confiance, tu vas kiffer</p>
+      </div>
+    </div>
+  </div>
+  <button class="btn" id="btn4" onclick="handleActivity()" disabled>Continuer →</button>
 </div>
 
-<!-- ═══════════ PAGE 4 : FINALE ═══════════ -->
-<div class="page hidden" id="page-final">
-  <h2 id="finalTitle">Joyeux anniversaire, Ruth 🎉</h2>
 
-  <p class="final-msg" id="finalMsg">
-    Tu méritais quelque chose d'unique pour ce jour.<br><br>
-    Quelqu'un a pensé à toi, pris le temps de créer ça —<br>
-    pas pour impressionner, mais parce que certaines personnes<br>
-    méritent qu'on fasse un effort.<br><br>
-    Si tu veux savoir qui se cache derrière tout ça… 👀
-  </p>
+<!-- SCREEN 4b : Questions bonus si "Moi je décide" -->
+<div class="screen" id="s4b">
+  <div class="deco">✦ Bonus ✦</div>
+  <h1>Aide-moi à<br><em>te gâter</em></h1>
+  <p class="lead">Quelques petites questions pour que je puisse préparer quelque chose qui te ressemble vraiment 🌸</p>
 
-  <!-- Vidéo finale — remplace final.mp4 par ton fichier -->
-  <div class="final-video-frame">
-    <video id="finalVideo" controls playsinline>
-      <source src="final.mp4" type="video/mp4">
-    </video>
+  <!-- Q1 : Humeur -->
+  <div style="width:100%;max-width:400px;margin-bottom:1rem;text-align:left;">
+    <label style="display:block;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--muted);margin-bottom:0.6rem;">Ton énergie ce soir-là ⚡</label>
+    <div class="options" id="q-energie">
+      <div class="option-card" style="padding:0.7rem 1.2rem" onclick="selectBonus('energie', this, 'Reposée & dispo pour tout')"><span class="option-icon">😊</span><div class="option-text"><h3>Reposée & dispo</h3></div></div>
+      <div class="option-card" style="padding:0.7rem 1.2rem" onclick="selectBonus('energie', this, 'Fatiguée, besoin de calme')"><span class="option-icon">😴</span><div class="option-text"><h3>Fatiguée, besoin de calme</h3></div></div>
+      <div class="option-card" style="padding:0.7rem 1.2rem" onclick="selectBonus('energie', this, 'Motivée, on sort !')"><span class="option-icon">🔥</span><div class="option-text"><h3>Motivée, on sort !</h3></div></div>
+    </div>
   </div>
 
-  <!-- Remplace qr.jpeg par ton vrai QR code WhatsApp -->
-  <div class="qr-frame">
-    <img src="qr.jpeg" alt="QR Code WhatsApp" onerror="this.src='https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://wa.me/TONNUMERO&color=7a1f4a'">
-    <div class="qr-label">Scanner pour engager la conversation</div>
+  <!-- Q2 : Ambiance -->
+  <div style="width:100%;max-width:400px;margin-bottom:1rem;text-align:left;">
+    <label style="display:block;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--muted);margin-bottom:0.6rem;">L'ambiance que tu préfères 🎶</label>
+    <div class="options" id="q-ambiance">
+      <div class="option-card" style="padding:0.7rem 1.2rem" onclick="selectBonus('ambiance', this, 'Calme & intime')"><span class="option-icon">🕯️</span><div class="option-text"><h3>Calme & intime</h3></div></div>
+      <div class="option-card" style="padding:0.7rem 1.2rem" onclick="selectBonus('ambiance', this, 'Animée & festive')"><span class="option-icon">🎉</span><div class="option-text"><h3>Animée & festive</h3></div></div>
+    </div>
   </div>
 
-  <button class="btn-back" onclick="goHome()">← Recommencer depuis le début</button>
+  <!-- Q3 : Cuisine -->
+  <div style="width:100%;max-width:400px;margin-bottom:1rem;text-align:left;">
+    <label style="display:block;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--muted);margin-bottom:0.6rem;">Ta cuisine préférée 🍽️</label>
+    <div class="options" id="q-cuisine">
+      <div class="option-card" style="padding:0.7rem 1.2rem" onclick="selectBonus('cuisine', this, 'Africaine / antillaise')"><span class="option-icon">🌍</span><div class="option-text"><h3>Africaine / antillaise</h3></div></div>
+      <div class="option-card" style="padding:0.7rem 1.2rem" onclick="selectBonus('cuisine', this, 'Française / européenne')"><span class="option-icon">🥐</span><div class="option-text"><h3>Française / européenne</h3></div></div>
+      <div class="option-card" style="padding:0.7rem 1.2rem" onclick="selectBonus('cuisine', this, 'Asiatique')"><span class="option-icon">🍜</span><div class="option-text"><h3>Asiatique</h3></div></div>
+      <div class="option-card" style="padding:0.7rem 1.2rem" onclick="selectBonus('cuisine', this, 'Peu importe tout me plait')"><span class="option-icon">😋</span><div class="option-text"><h3>Peu importe, tout me plaît !</h3></div></div>
+    </div>
+  </div>
+
+  <!-- Q4 : Activité soir -->
+  <div style="width:100%;max-width:400px;margin-bottom:1.5rem;text-align:left;">
+    <label style="display:block;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--muted);margin-bottom:0.6rem;">Ce que tu adores faire le soir 🌙</label>
+    <div class="options" id="q-soir">
+      <div class="option-card" style="padding:0.7rem 1.2rem" onclick="selectBonus('soir', this, 'Regarder un film / série')"><span class="option-icon">🎬</span><div class="option-text"><h3>Film / série</h3></div></div>
+      <div class="option-card" style="padding:0.7rem 1.2rem" onclick="selectBonus('soir', this, 'Sortir, explorer, bouger')"><span class="option-icon">🚶</span><div class="option-text"><h3>Sortir & explorer</h3></div></div>
+      <div class="option-card" style="padding:0.7rem 1.2rem" onclick="selectBonus('soir', this, 'Manger & papoter')"><span class="option-icon">💬</span><div class="option-text"><h3>Manger & papoter</h3></div></div>
+      <div class="option-card" style="padding:0.7rem 1.2rem" onclick="selectBonus('soir', this, 'Me détendre, rien de prévu')"><span class="option-icon">🛋️</span><div class="option-text"><h3>Se détendre</h3></div></div>
+    </div>
+  </div>
+
+  <button class="btn" id="btn4b" onclick="goTo('s5')" disabled>Voir le résultat →</button>
 </div>
 
-<audio id="bgMusic" src="music1.mp3" loop></audio>
+<!-- SCREEN 5 : Summary -->
+<div class="screen" id="s5">
+  <div class="heart-burst">💗</div>
+  <div class="deco">✦ C'est noté ✦</div>
+  <h1>Notre<br><em>prochaine fois</em></h1>
+  <div class="divider"></div>
+  <div class="summary-card">
+    <div class="summary-item">
+      <span class="summary-icon">📅</span>
+      <div>
+        <div class="summary-label">Le jour</div>
+        <div class="summary-value" id="sum-date">—</div>
+      </div>
+    </div>
+    <div class="summary-item">
+      <span class="summary-icon">📍</span>
+      <div>
+        <div class="summary-label">La ville</div>
+        <div class="summary-value" id="sum-city">—</div>
+      </div>
+    </div>
+    <div class="summary-item">
+      <span class="summary-icon">🌙</span>
+      <div>
+        <div class="summary-label">L'ambiance</div>
+        <div class="summary-value" id="sum-activity">—</div>
+      </div>
+    </div>
+    <div id="sum-bonus" style="display:none">
+      <div class="summary-item">
+        <span class="summary-icon">⚡</span>
+        <div>
+          <div class="summary-label">Ton énergie</div>
+          <div class="summary-value" id="sum-energie">—</div>
+        </div>
+      </div>
+      <div class="summary-item">
+        <span class="summary-icon">🎶</span>
+        <div>
+          <div class="summary-label">Ambiance préférée</div>
+          <div class="summary-value" id="sum-ambiance">—</div>
+        </div>
+      </div>
+      <div class="summary-item">
+        <span class="summary-icon">🍽️</span>
+        <div>
+          <div class="summary-label">Ta cuisine</div>
+          <div class="summary-value" id="sum-cuisine">—</div>
+        </div>
+      </div>
+      <div class="summary-item">
+        <span class="summary-icon">🛋️</span>
+        <div>
+          <div class="summary-label">Ce que t'aimes le soir</div>
+          <div class="summary-value" id="sum-soir">—</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="lead">Merci Raissa 🌸 Je m'occupe du reste. À très vite.</p>
+  <button class="btn" onclick="restart()" style="background:white;color:var(--rose-deep);border:1.5px solid var(--rose);box-shadow:none;margin-top:0.5rem;">↩ Recommencer</button>
+</div>
 
 <script>
-// ─────────── PÉTALES ───────────
-(function createPetals(){
-  const container = document.getElementById('petalsContainer');
-  const petalEmojis = ['🌸','🌷','💖','✨','🌹'];
-  for(let i = 0; i < 18; i++){
+
+  // ── Music ──────────────────────────────────────────────
+  let musicPlaying = false;
+  const audio = document.getElementById('bg-music');
+
+  function startMusic() {
+    audio.play().then(() => {
+      musicPlaying = true;
+      document.getElementById('music-toggle').style.display = 'flex';
+      document.getElementById('music-toggle').textContent = '🎵';
+      const btn = document.getElementById('btn-continue-music');
+      btn.style.opacity = '1';
+      btn.style.pointerEvents = 'auto';
+      document.querySelector('.play-circle').textContent = '⏸';
+      document.querySelector('.play-circle').onclick = toggleMusic;
+      document.getElementById('song-label').textContent = '— En cours de lecture —';
+    }).catch(() => {
+      // fallback if autoplay blocked
+      alert('Active le son sur ton téléphone 🎵');
+    });
+  }
+
+  function toggleMusic() {
+    if (musicPlaying) {
+      audio.pause();
+      musicPlaying = false;
+      document.getElementById('music-toggle').textContent = '🔇';
+    } else {
+      audio.play();
+      musicPlaying = true;
+      document.getElementById('music-toggle').textContent = '🎵';
+    }
+  }
+
+  // ── State ──────────────────────────────────────────────
+  let selectedCity = '';
+  let selectedActivity = '';
+  let bonusAnswers = { energie: '', ambiance: '', cuisine: '', soir: '' };
+
+  // ── Navigation ─────────────────────────────────────────
+  function goTo(id) {
+    if (id === 's5') {
+      const dateVal = document.getElementById('date-input').value;
+      if (dateVal) {
+        const d = new Date(dateVal + 'T12:00:00');
+        document.getElementById('sum-date').textContent =
+          d.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+      }
+      document.getElementById('sum-city').textContent = selectedCity || '—';
+      if (selectedActivity === 'Moi je décide 😏') {
+        document.getElementById('sum-activity').textContent = 'Moi je décide 😏';
+        const bonusEl = document.getElementById('sum-bonus');
+        if (bonusEl) {
+          bonusEl.style.display = 'block';
+          document.getElementById('sum-energie').textContent = bonusAnswers.energie;
+          document.getElementById('sum-ambiance').textContent = bonusAnswers.ambiance;
+          document.getElementById('sum-cuisine').textContent = bonusAnswers.cuisine;
+          document.getElementById('sum-soir').textContent = bonusAnswers.soir;
+        }
+      } else {
+        document.getElementById('sum-activity').textContent = selectedActivity || '—';
+      }
+    }
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  function handleActivity() {
+    if (selectedActivity === 'Moi je décide 😏') {
+      goTo('s4b');
+    } else {
+      goTo('s5');
+    }
+  }
+
+  // ── Petals ─────────────────────────────────────────────
+  const emojis = ['🌸', '🌷', '🌺', '✿', '❀'];
+  const container = document.getElementById('petals');
+  for (let i = 0; i < 18; i++) {
     const p = document.createElement('div');
     p.className = 'petal';
-    p.textContent = petalEmojis[Math.floor(Math.random() * petalEmojis.length)];
-    p.style.left = Math.random() * 100 + 'vw';
+    p.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    p.style.left = Math.random() * 100 + '%';
     p.style.animationDuration = (6 + Math.random() * 8) + 's';
     p.style.animationDelay = (Math.random() * 10) + 's';
-    p.style.fontSize = (0.8 + Math.random() * 1.2) + 'rem';
+    p.style.fontSize = (0.8 + Math.random() * 0.8) + 'rem';
     container.appendChild(p);
   }
-})();
 
-// ─────────── MUSIQUE ───────────
-const audio = document.getElementById('bgMusic');
-const musicBtn = document.getElementById('musicBtn');
-
-function toggleMusic(){
-  if(audio.paused){
-    audio.play().catch(()=>{});
-    musicBtn.classList.add('playing');
-    musicBtn.querySelector('.music-label').textContent = 'En lecture';
-  } else {
-    audio.pause();
-    musicBtn.classList.remove('playing');
-    musicBtn.querySelector('.music-label').textContent = 'Lancer la musique';
-  }
-}
-
-// Restaurer la musique si elle jouait avant un goHome()
-(function restoreMusic(){
-  const wasPlaying = sessionStorage.getItem('musicPlaying') === 'true';
-  const savedTime  = parseFloat(sessionStorage.getItem('musicTime') || '0');
-  sessionStorage.removeItem('musicPlaying');
-  sessionStorage.removeItem('musicTime');
-  if(wasPlaying){
-    audio.currentTime = savedTime;
-    audio.play().catch(()=>{});
-    musicBtn.classList.add('playing');
-    musicBtn.querySelector('.music-label').textContent = 'En lecture';
-  }
-})();
-
-// ─────────── NAVIGATION ───────────
-function goTo(page){
-  document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
-  if(page === 'quiz'){
-    document.getElementById('page-quiz').classList.remove('hidden');
-    initQuiz();
-  } else if(page === 'game'){
-    document.getElementById('page-game').classList.remove('hidden');
-    initGame();
-  } else if(page === 'final'){
-    document.getElementById('page-final').classList.remove('hidden');
-    launchConfetti();
-  }
-}
-
-function goHome(){
-  // On recharge sans couper la musique : on note la position avant reload
-  sessionStorage.setItem('musicTime', audio.currentTime);
-  sessionStorage.setItem('musicPlaying', !audio.paused);
-  location.reload();
-}
-
-// ─────────── QUIZ ───────────
-// Les réponses sont stockées pour personnaliser le message final
-const quizAnswers = [];
-
-const questions = [
-  {
-    q: "C'est ton anniversaire — quelle etait ta première envie du matin ?",
-    emoji: "🌅",
-    opts: [
-      "Rester au lit le plus longtemps possible",
-      "Attendre les messages qui arrivent",
-      "Commencer la journée comme une autre",
-      "Préparer quelque chose de spécial pour moi"
-    ]
-  },
-  {
-    q: "Le gâteau d'anniversaire idéal pour Ruth Patience, c'est…",
-    emoji: "🎂",
-    opts: [
-      "Au chocolat, sans hésitation",
-      "Aux fruits rouges, léger et frais",
-      "Une surprise — peu importe du moment que c'est fait avec soin",
-      "Peu importe le gâteau, c'est le moment qui compte"
-    ]
-  },
-  {
-    q: "Quelqu'un que tu ne connais pas te crée une surprise digitale pour ton anniversaire. Ta première réaction ?",
-    emoji: "💌",
-    opts: [
-      "De la curiosité — qui est derrière ça ?",
-      "De la surprise — c'est inattendu",
-      "De la touche — ce genre d'attention me touche",
-      "Du sourire — forcément"
-    ]
-  },
-  {
-    q: "Ce soir, pour fêter ça comme il se doit, tu choisis…",
-    emoji: "🌙",
-    opts: [
-      "Une sortie avec mes proches, bruyante et joyeuse",
-      "Un dîner calme, bonne ambiance, bonne musique",
-      "Un moment pour moi, tranquille et ressourçant",
-      "Laisser les autres décider — c'est leur journée autant que la mienne"
-    ]
-  }
-];
-
-let currentQ = 0;
-
-function initQuiz(){
-  currentQ = 0;
-  buildProgress();
-  loadQuestion();
-}
-
-function buildProgress(){
-  const prog = document.getElementById('quizProgress');
-  prog.innerHTML = '';
-  questions.forEach((_, i) => {
-    const dot = document.createElement('div');
-    dot.className = 'progress-dot';
-    dot.id = 'dot-' + i;
-    prog.appendChild(dot);
+  // ── Date input ─────────────────────────────────────────
+  document.getElementById('date-input').addEventListener('change', function() {
+    document.getElementById('btn2').disabled = !this.value;
   });
-}
 
-function loadQuestion(){
-  if(currentQ >= questions.length){
-    goTo('game');
-    return;
+  // ── City selection ─────────────────────────────────────
+  function selectCity(el, value) {
+    document.querySelectorAll('#city-options .option-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    selectedCity = value;
+    document.getElementById('btn3').disabled = false;
   }
 
-  const q = questions[currentQ];
-  document.getElementById('quizQNum').textContent = q.emoji + '  ' + (currentQ + 1) + ' / ' + questions.length;
-  document.getElementById('quizQuestion').textContent = q.q;
-
-  const opts = document.getElementById('quizOptions');
-  opts.innerHTML = '';
-
-  // Animate card
-  const card = document.getElementById('quizCard');
-  card.style.opacity = '0'; card.style.transform = 'translateY(20px)';
-  setTimeout(() => {
-    card.style.transition = 'all 0.4s ease';
-    card.style.opacity = '1'; card.style.transform = 'translateY(0)';
-  }, 50);
-
-  q.opts.forEach(opt => {
-    const btn = document.createElement('button');
-    btn.className = 'quiz-opt';
-    btn.textContent = opt;
-    btn.onclick = () => nextQuestion(opt);
-    opts.appendChild(btn);
-  });
-}
-
-function nextQuestion(chosenOpt){
-  quizAnswers.push(chosenOpt);
-  document.getElementById('dot-' + currentQ).classList.add('done');
-  currentQ++;
-  setTimeout(loadQuestion, 300);
-}
-
-// ─────────── JEU MÉMOIRE ───────────
-const EMOJIS = ['💖','🌸','✨','😍'];
-let cardData = [];
-let flipped = [];
-let matched = 0;
-let locked = false;
-
-function initGame(){
-  matched = 0;
-  flipped = [];
-  locked = false;
-  document.getElementById('pairesCount').textContent = '0';
-
-  // Mélange
-  cardData = shuffle([...EMOJIS, ...EMOJIS]);
-
-  const board = document.getElementById('gameBoard');
-  board.innerHTML = '';
-
-  cardData.forEach((emoji, idx) => {
-    const card = document.createElement('div');
-    card.className = 'card';
-    card.dataset.emoji = emoji;
-    card.dataset.idx = idx;
-
-    card.innerHTML = `
-      <div class="card-face card-back">🎴</div>
-      <div class="card-face card-front">${emoji}</div>
-    `;
-
-    card.addEventListener('click', () => flipCard(card));
-    board.appendChild(card);
-  });
-}
-
-function flipCard(card){
-  if(locked) return;
-  if(card.classList.contains('flipped')) return;
-  if(card.classList.contains('matched')) return;
-
-  card.classList.add('flipped');
-  flipped.push(card);
-
-  if(flipped.length === 2){
-    locked = true;
-    setTimeout(checkPair, 800);
+  // ── Activity selection ─────────────────────────────────
+  function selectActivity(el, value) {
+    document.querySelectorAll('#activity-options .option-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    selectedActivity = value;
+    document.getElementById('btn4').disabled = false;
   }
-}
 
-function checkPair(){
-  const [a, b] = flipped;
+  // ── Restart ───────────────────────────────────────────
+  function restart() {
+    selectedCity = '';
+    selectedActivity = '';
+    bonusAnswers = { energie: '', ambiance: '', cuisine: '', soir: '' };
+    document.getElementById('date-input').value = '';
+    document.getElementById('btn2').disabled = true;
+    document.getElementById('btn3').disabled = true;
+    document.getElementById('btn4').disabled = true;
+    document.getElementById('btn4b').disabled = true;
+    document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+    document.getElementById('sum-bonus').style.display = 'none';
+    goTo('s1a');
+  }
 
-  if(a.dataset.emoji === b.dataset.emoji){
-    a.classList.add('matched');
-    b.classList.add('matched');
-    matched++;
-    document.getElementById('pairesCount').textContent = matched;
-
-    if(matched === EMOJIS.length){
-      setTimeout(() => goTo('final'), 700);
+  // ── Bonus questions ────────────────────────────────────
+  function selectBonus(key, el, value) {
+    document.querySelectorAll('#q-' + key + ' .option-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    bonusAnswers[key] = value;
+    if (bonusAnswers.energie && bonusAnswers.ambiance && bonusAnswers.cuisine && bonusAnswers.soir) {
+      document.getElementById('btn4b').disabled = false;
     }
-  } else {
-    a.classList.remove('flipped');
-    b.classList.remove('flipped');
   }
-
-  flipped = [];
-  locked = false;
-}
-
-function shuffle(arr){
-  for(let i = arr.length - 1; i > 0; i--){
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
-  return arr;
-}
-
-// ─────────── CONFETTI ───────────
-function launchConfetti(){
-  const colors = ['#e8537a','#f9a8c0','#d4a054','#a8e6cf','#dda0dd','#87ceeb'];
-  for(let i = 0; i < 120; i++){
-    setTimeout(() => {
-      const c = document.createElement('div');
-      c.className = 'confetti-piece';
-      c.style.left = Math.random() * 100 + 'vw';
-      c.style.background = colors[Math.floor(Math.random() * colors.length)];
-      c.style.width = (6 + Math.random() * 8) + 'px';
-      c.style.height = (6 + Math.random() * 8) + 'px';
-      c.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
-      c.style.animationDuration = (2.5 + Math.random() * 2.5) + 's';
-      document.body.appendChild(c);
-      setTimeout(() => c.remove(), 6000);
-    }, i * 30);
-  }
-}
-
-// ─────────── SLIDER PHOTOS ───────────
-let slideIndex = 0;
-const slides = document.querySelectorAll(".slide");
-const dotsContainer = document.getElementById("sliderDots");
-
-// Créer les dots
-slides.forEach((_, i) => {
-  const dot = document.createElement("button");
-  dot.className = "s-dot" + (i === 0 ? " active" : "");
-  dot.onclick = () => goSlide(i);
-  dotsContainer.appendChild(dot);
-});
-
-function goSlide(n) {
-  slides[slideIndex].classList.remove("active");
-  document.querySelectorAll(".s-dot")[slideIndex].classList.remove("active");
-  slideIndex = (n + slides.length) % slides.length;
-  slides[slideIndex].classList.add("active");
-  document.querySelectorAll(".s-dot")[slideIndex].classList.add("active");
-}
-
-function slideMove(dir) { goSlide(slideIndex + dir); }
-
-// Auto-défilement toutes les 3s
-setInterval(() => slideMove(1), 3000);
 </script>
 </body>
 </html>
