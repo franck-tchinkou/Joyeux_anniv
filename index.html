@@ -764,81 +764,29 @@
 </div>
 
 <script>
+  // ══════════════════════════════════════════════
+  //  STATE
+  // ══════════════════════════════════════════════
+  var selectedCity = '';
+  var selectedActivity = '';
+  var bonusAnswers = { energie: '', ambiance: '', cuisine: '', soir: '' };
+  var musicPlaying = false;
 
-
-  // ── Music ──────────────────────────────────────────────
-  let musicPlaying = false;
-
-  function getAudio() {
-    return document.getElementById('bg-music');
-  }
-
-  function startMusic() {
-    const audio = getAudio();
-    if (!audio) return;
-    audio.play().then(() => {
-      musicPlaying = true;
-      document.getElementById('music-toggle').style.display = 'flex';
-      document.getElementById('btn-play').textContent = '⏸ En cours de lecture';
-      document.getElementById('btn-play').onclick = toggleMusic;
-      document.getElementById('song-label').textContent = '✦ Essence — Wizkid ft. Tems ✦';
-    }).catch((e) => {
-      document.getElementById('song-label').textContent = '⚠ ' + e.message;
-    });
-  }
-
-  function toggleMusic() {
-    const audio = getAudio();
-    if (!audio) return;
-    if (musicPlaying) {
-      audio.pause();
-      musicPlaying = false;
-      document.getElementById('music-toggle').textContent = '🔇';
-      document.getElementById('btn-play').textContent = '▶ Reprendre la lecture';
-      document.getElementById('btn-play').onclick = startMusic;
-    } else {
-      audio.play();
-      musicPlaying = true;
-      document.getElementById('music-toggle').textContent = '🎵';
-      document.getElementById('btn-play').textContent = '⏸ En cours de lecture';
-      document.getElementById('btn-play').onclick = toggleMusic;
-    }
-  }
-
-  // ── State ──────────────────────────────────────────────
-  let selectedCity = '';
-  let selectedActivity = '';
-  let bonusAnswers = { energie: '', ambiance: '', cuisine: '', soir: '' };
-
-  // ── Navigation ─────────────────────────────────────────
+  // ══════════════════════════════════════════════
+  //  NAVIGATION
+  // ══════════════════════════════════════════════
   function goTo(id) {
     if (id === 's5') {
-      const dateVal = document.getElementById('date-input').value;
-      if (dateVal) {
-        const d = new Date(dateVal + 'T12:00:00');
+      var dateInput = document.getElementById('date-input');
+      if (dateInput && dateInput.value) {
+        var d = new Date(dateInput.value + 'T12:00:00');
         document.getElementById('sum-date').textContent =
           d.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
       }
       document.getElementById('sum-city').textContent = selectedCity || '—';
-
-      // Envoi automatique à Formspree
-      fetch('https://formspree.io/f/mjgeeyjy', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          date: dateVal,
-          ville: selectedCity,
-          activite: selectedActivity,
-          energie: bonusAnswers.energie || 'N/A',
-          ambiance: bonusAnswers.ambiance || 'N/A',
-          cuisine: bonusAnswers.cuisine || 'N/A',
-          soir: bonusAnswers.soir || 'N/A'
-        })
-      }).catch(() => {});
-
       if (selectedActivity === 'Moi je décide 😏') {
         document.getElementById('sum-activity').textContent = 'Moi je décide 😏';
-        const bonusEl = document.getElementById('sum-bonus');
+        var bonusEl = document.getElementById('sum-bonus');
         if (bonusEl) {
           bonusEl.style.display = 'block';
           document.getElementById('sum-energie').textContent = bonusAnswers.energie;
@@ -849,8 +797,22 @@
       } else {
         document.getElementById('sum-activity').textContent = selectedActivity || '—';
       }
+      // Envoi Formspree
+      fetch('https://formspree.io/f/mjgeeyjy', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          date: document.getElementById('date-input').value,
+          ville: selectedCity,
+          activite: selectedActivity,
+          energie: bonusAnswers.energie || 'N/A',
+          ambiance: bonusAnswers.ambiance || 'N/A',
+          cuisine: bonusAnswers.cuisine || 'N/A',
+          soir: bonusAnswers.soir || 'N/A'
+        })
+      }).catch(function() {});
     }
-    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.screen').forEach(function(s) { s.classList.remove('active'); });
     document.getElementById(id).classList.add('active');
     window.scrollTo(0, 0);
   }
@@ -863,61 +825,85 @@
     }
   }
 
-  
-  document.addEventListener("DOMContentLoaded", function() {
-// ── Petals ─────────────────────────────────────────────
-  const emojis = ['🌸', '🌷', '🌺', '✿', '❀'];
-  const container = document.getElementById('petals');
-  for (let i = 0; i < 18; i++) {
-    const p = document.createElement('div');
-    p.className = 'petal';
-    p.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-    p.style.left = Math.random() * 100 + '%';
-    p.style.animationDuration = (6 + Math.random() * 8) + 's';
-    p.style.animationDelay = (Math.random() * 10) + 's';
-    p.style.fontSize = (0.8 + Math.random() * 0.8) + 'rem';
-    container.appendChild(p);
+  function restart() {
+    selectedCity = '';
+    selectedActivity = '';
+    bonusAnswers = { energie: '', ambiance: '', cuisine: '', soir: '' };
+    var dateInput = document.getElementById('date-input');
+    if (dateInput) dateInput.value = '';
+    document.getElementById('btn2').disabled = true;
+    document.getElementById('btn3').disabled = true;
+    document.getElementById('btn4').disabled = true;
+    document.getElementById('btn4b').disabled = true;
+    document.querySelectorAll('.option-card').forEach(function(c) { c.classList.remove('selected'); });
+    var bonus = document.getElementById('sum-bonus');
+    if (bonus) bonus.style.display = 'none';
+    var btnPlay = document.getElementById('btn-play');
+    if (btnPlay) { btnPlay.textContent = '▶ Appuyer pour lire'; btnPlay.onclick = startMusic; }
+    var songLabel = document.getElementById('song-label');
+    if (songLabel) songLabel.textContent = '';
+    goTo('s1');
   }
 
-  // ── Date input ─────────────────────────────────────────
-  document.getElementById('date-input').addEventListener('change', function() {
-    document.getElementById('btn2').disabled = !this.value;
-  });
+  // ══════════════════════════════════════════════
+  //  MUSIC
+  // ══════════════════════════════════════════════
+  function getAudio() { return document.getElementById('bg-music'); }
 
-  // ── City selection ─────────────────────────────────────
+  function startMusic() {
+    var audio = getAudio();
+    if (!audio) return;
+    audio.play().then(function() {
+      musicPlaying = true;
+      var toggle = document.getElementById('music-toggle');
+      if (toggle) { toggle.style.display = 'flex'; toggle.textContent = '🎵'; }
+      var btn = document.getElementById('btn-play');
+      if (btn) { btn.textContent = '⏸ En cours de lecture'; btn.onclick = toggleMusic; }
+      var label = document.getElementById('song-label');
+      if (label) label.textContent = '✦ Essence — Wizkid ft. Tems ✦';
+    }).catch(function(e) {
+      var label = document.getElementById('song-label');
+      if (label) label.textContent = '⚠ ' + e.message;
+    });
+  }
+
+  function toggleMusic() {
+    var audio = getAudio();
+    if (!audio) return;
+    var toggle = document.getElementById('music-toggle');
+    var btn = document.getElementById('btn-play');
+    if (musicPlaying) {
+      audio.pause();
+      musicPlaying = false;
+      if (toggle) toggle.textContent = '🔇';
+      if (btn) { btn.textContent = '▶ Reprendre la lecture'; btn.onclick = startMusic; }
+    } else {
+      audio.play();
+      musicPlaying = true;
+      if (toggle) toggle.textContent = '🎵';
+      if (btn) { btn.textContent = '⏸ En cours de lecture'; btn.onclick = toggleMusic; }
+    }
+  }
+
+  // ══════════════════════════════════════════════
+  //  SELECTIONS
+  // ══════════════════════════════════════════════
   function selectCity(el, value) {
-    document.querySelectorAll('#city-options .option-card').forEach(c => c.classList.remove('selected'));
+    document.querySelectorAll('#city-options .option-card').forEach(function(c) { c.classList.remove('selected'); });
     el.classList.add('selected');
     selectedCity = value;
     document.getElementById('btn3').disabled = false;
   }
 
-  // ── Activity selection ─────────────────────────────────
   function selectActivity(el, value) {
-    document.querySelectorAll('#activity-options .option-card').forEach(c => c.classList.remove('selected'));
+    document.querySelectorAll('#activity-options .option-card').forEach(function(c) { c.classList.remove('selected'); });
     el.classList.add('selected');
     selectedActivity = value;
     document.getElementById('btn4').disabled = false;
   }
 
-  // ── Restart ───────────────────────────────────────────
-  function restart() {
-    selectedCity = '';
-    selectedActivity = '';
-    bonusAnswers = { energie: '', ambiance: '', cuisine: '', soir: '' };
-    document.getElementById('date-input').value = '';
-    document.getElementById('btn2').disabled = true;
-    document.getElementById('btn3').disabled = true;
-    document.getElementById('btn4').disabled = true;
-    document.getElementById('btn4b').disabled = true;
-    document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
-    document.getElementById('sum-bonus').style.display = 'none';
-    goTo('s1'); document.getElementById('btn-play').textContent = '▶ Appuyer pour lire'; document.getElementById('btn-play').onclick = startMusic; document.getElementById('song-label').textContent = '';
-  }
-
-  // ── Bonus questions ────────────────────────────────────
   function selectBonus(key, el, value) {
-    document.querySelectorAll('#q-' + key + ' .option-card').forEach(c => c.classList.remove('selected'));
+    document.querySelectorAll('#q-' + key + ' .option-card').forEach(function(c) { c.classList.remove('selected'); });
     el.classList.add('selected');
     bonusAnswers[key] = value;
     if (bonusAnswers.energie && bonusAnswers.ambiance && bonusAnswers.cuisine && bonusAnswers.soir) {
@@ -925,12 +911,13 @@
     }
   }
 
-  // ── Memory Game ────────────────────────────────────────
-  const gameEmojis = ['💕', '🌹', '💌', '✨'];
-  let gameCards = [];
-  let flippedCards = [];
-  let matchedPairs = 0;
-  let canFlip = true;
+  // ══════════════════════════════════════════════
+  //  MEMORY GAME
+  // ══════════════════════════════════════════════
+  var gameEmojis = ['💕', '🌹', '💌', '✨'];
+  var flippedCards = [];
+  var matchedPairs = 0;
+  var canFlip = true;
 
   function initGame() {
     matchedPairs = 0;
@@ -939,37 +926,30 @@
     document.getElementById('pairs-found').textContent = '0';
     document.getElementById('game-win').style.display = 'none';
 
-    const pairs = [...gameEmojis, ...gameEmojis];
-    // shuffle
-    pairs.sort(() => Math.random() - 0.5);
+    var pairs = gameEmojis.concat(gameEmojis);
+    pairs.sort(function() { return Math.random() - 0.5; });
 
-    const grid = document.getElementById('game-grid');
+    var grid = document.getElementById('game-grid');
     grid.innerHTML = '';
 
-    pairs.forEach((emoji, i) => {
-      const card = document.createElement('div');
+    pairs.forEach(function(emoji, i) {
+      var card = document.createElement('div');
       card.className = 'card';
       card.dataset.emoji = emoji;
-      card.dataset.index = i;
-      card.innerHTML = `
-        <div class="card-face card-back"></div>
-        <div class="card-face card-front">${emoji}</div>
-      `;
-      card.addEventListener('click', () => flipCard(card));
+      card.innerHTML =
+        '<div class="card-face card-back"></div>' +
+        '<div class="card-face card-front">' + emoji + '</div>';
+      card.addEventListener('click', function() { flipCard(card); });
       grid.appendChild(card);
     });
-
-    gameCards = Array.from(grid.querySelectorAll('.card'));
   }
 
   function flipCard(card) {
     if (!canFlip) return;
     if (card.classList.contains('flipped') || card.classList.contains('matched')) return;
     if (flippedCards.length >= 2) return;
-
     card.classList.add('flipped');
     flippedCards.push(card);
-
     if (flippedCards.length === 2) {
       canFlip = false;
       checkMatch();
@@ -977,7 +957,8 @@
   }
 
   function checkMatch() {
-    const [a, b] = flippedCards;
+    var a = flippedCards[0];
+    var b = flippedCards[1];
     if (a.dataset.emoji === b.dataset.emoji) {
       a.classList.add('matched');
       b.classList.add('matched');
@@ -986,12 +967,12 @@
       flippedCards = [];
       canFlip = true;
       if (matchedPairs === 4) {
-        setTimeout(() => {
+        setTimeout(function() {
           document.getElementById('game-win').style.display = 'flex';
         }, 500);
       }
     } else {
-      setTimeout(() => {
+      setTimeout(function() {
         a.classList.remove('flipped');
         b.classList.remove('flipped');
         flippedCards = [];
@@ -1000,7 +981,28 @@
     }
   }
 
+  // ══════════════════════════════════════════════
+  //  INIT ON LOAD
+  // ══════════════════════════════════════════════
+  document.addEventListener('DOMContentLoaded', function() {
+    // Petals
+    var emojis = ['🌸', '🌷', '🌺', '✿', '❀'];
+    var container = document.getElementById('petals');
+    for (var i = 0; i < 18; i++) {
+      var p = document.createElement('div');
+      p.className = 'petal';
+      p.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      p.style.left = Math.random() * 100 + '%';
+      p.style.animationDuration = (6 + Math.random() * 8) + 's';
+      p.style.animationDelay = (Math.random() * 10) + 's';
+      p.style.fontSize = (0.8 + Math.random() * 0.8) + 'rem';
+      container.appendChild(p);
+    }
 
+    // Date input
+    document.getElementById('date-input').addEventListener('change', function() {
+      document.getElementById('btn2').disabled = !this.value;
+    });
   });
 </script>
 </body>
